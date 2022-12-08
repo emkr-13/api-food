@@ -22,17 +22,20 @@ Route::post('register', 'Api\UserController@register');
 Route::post('login', 'Api\UserController@login');
 Route::get('user', 'Api\UserController@index');
 
+
 Route::get('makanan', 'Api\MakananController@index');
 Route::get('makanan/{id}', 'Api\MakananController@show');
 Route::post('makanan', 'Api\MakananController@store');
 Route::put('makanan/{id}', 'Api\MakananController@update');
 Route::delete('makanan/{id}', 'Api\MakananController@destroy');
+Route::put('user/{id}', 'Api\UserController@update');
+Route::get('user/{id}', 'Api\UserController@show');
 
 
-Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:api'], function () {
 
-    Route::put('user', 'Api\UserController@update');
-    Route::delete('user/{id}', 'Api\UserController@destroy');
-    Route::post('logout', 'Api\UserController@logout');
-    Route::get('user-profile', 'Api\UserController@show');
-});
+//
+//     Route::delete('user/{id}', 'Api\UserController@destroy');
+//     Route::post('logout', 'Api\UserController@logout');
+//
+// });
