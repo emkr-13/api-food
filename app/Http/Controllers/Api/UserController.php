@@ -11,28 +11,28 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     // Register
+
     public function register(Request $request)
     {
-        $registrationData = $request->all();
+        $regis = $request->all();
 
-        $validate = Validator::make($registrationData, [
+        $validate = Validator::make($regis, [
             'username'  => 'required|max:255',
-            'email'     => 'required|max:255',
             'password'  => 'required',
+            'email'     => 'required|max:255',
             'tanggal_lahir' => 'required',
             'telepon'     => 'required',
         ]);
 
+
         if ($validate->fails()) {
-            return response()->json([
-                'message'   => 'Validation Error',
-                'data'      => null,
-            ], 400);
+            return response()->json($validate->errors(), 400);
         }
 
-        $registrationData['password'] = bcrypt($request->password);
 
-        $user = User::create($registrationData);
+        $regis['password'] = bcrypt($request->password);
+
+        $user = User::create($regis);
 
         return response([
             'message'   => 'Register Success',
@@ -64,13 +64,10 @@ class UserController extends Controller
         /** @var \App\Models\MyUserModel $user **/
         $user = Auth::user();
 
-        $accessToken = $user->createToken('Authentication Token')->accessToken;
-
         return response()->json([
             'message'       => 'Authenticated',
             'data'          => $user,
-            'token_type'    => 'Bearer',
-            'access_token'  => $accessToken,
+
         ]);
     }
 
@@ -87,19 +84,18 @@ class UserController extends Controller
         }
 
         return response()->json([
-            'message'   => 'Empty',
+            'message'   => 'Kosong',
             'user'      => null
         ], 400);
     }
 
-    public function show()
+    public function show($id)
     {
 
         //find user id by token
 
-        $id_user = Auth::id();
 
-        $user = User::find($id_user);
+        $user = User::find($id);
 
 
         if (!is_null($user)) {
@@ -118,9 +114,9 @@ class UserController extends Controller
 
 
     //update data
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $id = Auth::id();
+        
 
         $user = User::find($id);
 

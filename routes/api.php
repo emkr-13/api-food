@@ -27,15 +27,13 @@ Route::get('makanan', 'Api\MakananController@index');
 Route::get('makanan/{id}', 'Api\MakananController@show');
 Route::post('makanan', 'Api\MakananController@store');
 Route::put('makanan/{id}', 'Api\MakananController@update');
-Route::delete('makanan/{id}', 'Api\MakananController@destroy');
-Route::put('user/{id}', 'Api\UserController@update');
+Route::delete('makanan/{id}', 'Api\MakananController@destroy');;
 Route::get('user/{id}', 'Api\UserController@show');
-
+Route::put('user/{id}', 'Api\UserController@update');
 
 // Route::group(['middleware' => 'auth:api'], function () {
 
-//
+
 //     Route::delete('user/{id}', 'Api\UserController@destroy');
 //     Route::post('logout', 'Api\UserController@logout');
-//
 // });
