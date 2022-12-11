@@ -66,7 +66,7 @@ class UserController extends Controller
 
         return response()->json([
             'message'       => 'Authenticated',
-            'data'          => $user,
+            'user'          => $user,
 
         ]);
     }
@@ -116,7 +116,7 @@ class UserController extends Controller
     //update data
     public function update(Request $request,$id)
     {
-        
+
 
         $user = User::find($id);
 
