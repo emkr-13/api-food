@@ -28,8 +28,16 @@ Route::get('makanan', 'Api\MakananController@index');
 Route::get('makanan/{id}', 'Api\MakananController@show');
 Route::post('makanan', 'Api\MakananController@store');
 Route::put('makanan/{id}', 'Api\MakananController@update');
-Route::delete('makanan/{id}', 'Api\MakananController@destroy');;
+Route::delete('makanan/{id}', 'Api\MakananController@destroy');
 // Pesanan
-
-
+Route::get('pesanan', 'Api\PesananController@index');
+Route::get('pesanan/{id}', 'Api\PesananController@show');
+Route::post('pesanan', 'Api\PesananController@store');
+Route::put('pesanan/{id}', 'Api\PesananController@update');
+Route::delete('pesanan/{id}', 'Api\PesananController@destroy');
 // Saran dan Kritik
+Route::get('komentar', 'Api\KomentarController@index');
+Route::get('komentar/{id}', 'Api\KomentarController@show');
+Route::post('komentar', 'Api\KomentarController@store');
+Route::put('komentar/{id}', 'Api\KomentarController@update');
+Route::delete('komentar/{id}', 'Api\KomentarController@destroy');

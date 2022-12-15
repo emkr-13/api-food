@@ -3,27 +3,28 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Makanan;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class MakananController extends Controller
+
+class KomentarController extends Controller
 {
     public function index()
     {
 
-        $makanan = Makanan::all();
+        $pesanan = Komentar::all();
 
-        if (count($makanan) > 0) {
+        if (count($pesanan) > 0) {
             return response()->json([
-                'message'   => 'List Data Makanan',
-                'data'      => $makanan
+                'message'   => 'List Data Komentar',
+                'data'      => $pesanan
             ], 200);
         };
 
         return response()->json([
-            'message'   => 'Masih Kosong Data Makanan',
+            'message'   => 'Masih Kosong Data Komentar',
             'data'      => null
         ], 200);
     }
@@ -33,21 +34,21 @@ class MakananController extends Controller
     public function show($id)
     {
 
-        $makanan = Makanan::find($id);
+        $pesanan = Komentar::find($id);
 
-        if (!is_null($makanan)) {
+        if (!is_null($pesanan)) {
             return response()->json([
-                'message'   => 'Retrieve Makanan Success',
-                'data'      => $makanan
+                'message'   => 'Retrieve Komentar Success',
+                'data'      => $pesanan
             ], 200);
         }
 
         return response()->json([
-            'message'   => 'Makanan Not Found',
+            'message'   => 'Komentar Not Found',
             'data'      => null
         ], 404);
     }
-    
+
     public function create()
     {
     }
@@ -56,8 +57,10 @@ class MakananController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'nama'          => 'required',
-            'harga'   => 'required',
+            'jenis_komentar' => 'required',
+            'nama_makanan'   => 'required',
+            'cacatan'        => 'required',
+
         ]);
 
         if ($validator->fails()) {
@@ -67,21 +70,21 @@ class MakananController extends Controller
             ], 400);
         }
 
-        $makanan = Makanan::create([
+        $pesanan = Komentar::create([
             'nama'          => $request->nama,
             'harga'   => $request->harga,
         ]);
 
 
-        if ($makanan) {
+        if ($pesanan) {
             return response()->json([
-                'message'   => 'Makanan Created',
-                'data'      => $makanan,
+                'message'   => 'Komentar Created',
+                'data'      => $pesanan,
             ], 201);
         }
 
         return response()->json([
-            'message'   => 'Makanan Failed to Save',
+            'message'   => 'Komentar Failed to Save',
             'data'      => null,
         ], 400);
     }
@@ -92,11 +95,11 @@ class MakananController extends Controller
     public function update(Request $request, $id)
     {
 
-        $makanan = Makanan::find($id);
+        $pesanan = Komentar::find($id);
 
-        if (is_null($makanan)) {
+        if (is_null($pesanan)) {
             return response()->json([
-                'message'   => 'Makanan Not Found',
+                'message'   => 'Komentar Not Found',
                 'data'      => null
             ], 404);
         }
@@ -104,39 +107,40 @@ class MakananController extends Controller
         $updateData = $request->all();
 
         $validate = Validator::make($updateData, [
-            'nama' => 'required|max:255',
-            'harga' => 'required|max:255',
+            'jenis_komentar' => 'required',
+            'nama_makanan'   => 'required',
+            'cacatan'        => 'required',
         ]);
 
         if ($validate->fails())
             return response(['message' => $validate->errors()], 400);
 
 
-        $makanan->update($updateData);
+        $pesanan->update($updateData);
 
         return response()->json([
-            'message'   => 'Update Makanan Success',
-            'data'      => $makanan
+            'message'   => 'Update Komentar Success',
+            'data'      => $pesanan
         ], 200);
     }
 
     public function destroy($id)
     {
 
-        $makanan = Makanan::find($id);
+        $pesanan = Komentar::find($id);
 
-        if (is_null($makanan)) {
+        if (is_null($pesanan)) {
             return response()->json([
-                'message'   => 'Makanan Not Found',
+                'message'   => 'Komentar Not Found',
                 'data'      => null
             ], 404);
         }
 
-        $makanan->delete();
+        $pesanan->delete();
 
         return response()->json([
-            'message'   => 'Delete Makanan Success',
-            'data'      => $makanan
+            'message'   => 'Delete Komentar Success',
+            'data'      => $pesanan
         ], 200);
     }
 }
