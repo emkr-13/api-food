@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('harga');
-            $table->integer('total_pesanan');
+            $table->string('harga');
+            $table->string('total_pesanan');
             $table->string('note_pesanan');
             $table->timestamps();
         });

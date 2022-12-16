@@ -72,6 +72,8 @@ class PesananController extends Controller
         $pesanan = Pesanan::create([
             'nama'          => $request->nama,
             'harga'   => $request->harga,
+            'total_pesanan'          => $request->total_pesanan,
+            'note_pesanan'   => $request->note_pesanan,
         ]);
 
 

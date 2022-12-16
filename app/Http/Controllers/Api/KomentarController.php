@@ -71,8 +71,9 @@ class KomentarController extends Controller
         }
 
         $pesanan = Komentar::create([
-            'nama'          => $request->nama,
-            'harga'   => $request->harga,
+            'jenis_komentar'          => $request->jenis_komentar,
+            'nama_makanan'   => $request->nama_makanan,
+            'cacatan'   => $request->cacatan,
         ]);
 
 
